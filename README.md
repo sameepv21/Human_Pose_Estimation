@@ -7,10 +7,9 @@ The purpose of this project is to identify and locate key points, such as the jo
 * The project is build on Python version 3.8.10. Please ensure that you have Python version 3.8.10 or later installed on your device.
 * Even though this project was run on Ubuntu 20.04, it should run fine with any distro of linux.
 * There are two options of dataset. One is entire COCO 2017 keypoints dataset which requires a total of 45GB of disk space after unzipping and the other contains a subset of the dataset which requires around 4GB of the storage.
+* The device needs at least 4 cores to run this project. 
 
 # Installation and Running
-
-
 * Clone the repository using the below command
 ```bash
 git clone https://github.com/sameepv21/Human_Pose_Estimation.git
