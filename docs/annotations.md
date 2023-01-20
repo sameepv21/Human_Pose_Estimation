@@ -14,4 +14,5 @@ The annotation.json file in the COCO dataset for human pose estimation has a spe
         * Note that for bounding box the array respresents [x-corrdinate of the top left corner, y-corrdinate of the same, width of the bounding box, height of the bounding box]
     5. "segmentation" : The segmentation mask for the object instance.
     6. "categories" : This field contains information about the object categories in the dataset, including the name and ID of the category.
+        * Categories represent different body parts like heads, shoulders etc.
 3. "licenses" : This field contains information about the license for the dataset.
