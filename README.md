@@ -34,3 +34,8 @@ python small.py
 cd scripts/
 python large.py
 ```
+* Process the annotations file to fetch only the required number of fields / records.
+```bash
+# ensure that current directory in scripts
+python fetch_annotation.py
+```
