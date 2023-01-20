@@ -14,7 +14,7 @@ def download_train():
     os.system('cp train2017 ../data/train2017 -r')
     os.system('rm -rf train2017/')
     os.system("clear")
-    print("TRAINING SET EXTRACTION COMPLETED")
+    print("TRAINING SET EXTRACTED")
 
 def download_test():
     os.system('curl -L -o "test2017.zip" ' + TEST_URL)
@@ -24,7 +24,7 @@ def download_test():
     os.system('cp test2017 ../data/test2017 -r')
     os.system('rm -rf test2017/')
     os.system('clear')
-    print('TESTING SET EXTRACTION COMPLETED')
+    print('TESTING SET EXTRACTED')
 
 def download_val():
     os.system('curl -L -o "val2017.zip" ' + VAL_URL)
@@ -34,7 +34,7 @@ def download_val():
     os.system('cp val2017 ../data/val2017 -r')
     os.system('rm -rf val2017/')
     os.system('clear')
-    print('VALIDATION SET EXTRACTION COMPLETED')
+    print('VALIDATION SET EXTRACTED')
 
 download_train()
 download_test()
