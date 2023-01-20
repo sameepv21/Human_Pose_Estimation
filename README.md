@@ -28,7 +28,7 @@ mkdir data
 cd scripts/
 python small.py
 ```
-* Check once in the "data" folder whether you have a directory named "small".
+> Check once in the "data" folder whether you have a directory named "small".
 * Download and extract the entire dataset
 ```bash
 cd scripts/
