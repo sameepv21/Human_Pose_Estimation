@@ -1,9 +1,7 @@
 import numpy as np
-import os
 import json
 
-menu_selection = 0
-
+# Function to display menu to the user
 def menu():
     _input = 0
     while(_input not in [1, 2, 3, 4]):
@@ -21,18 +19,21 @@ def menu():
         except:
             print("Invalid Selection")
 
+# Function to process the json file and fetch only the required records
 def annotate(path):
+    # open the json file
     with open(path) as json_file:
         data = json.load(json_file)
-    
-    arr_json = []
-    cleaned_data = {}
-    len_flag = 0
+
+    arr_json = [] # final array for storing records for all the images
+    len_flag = 0 # assertion flag for checking if the number of images in the JSON file and array are same or not
     for img_data in data.get('annotations'):
+        cleaned_data = {} # temp dict for individual image
         len_flag += 1
         cleaned_data['image_id'] = img_data.get('image_id')
         cleaned_data['bbox'] = img_data.get('bbox')
         
+        # create a 17x3 matrix instead of 51,1
         keypoints_arr = img_data.get('keypoints')
         processed_keypoints = np.empty(shape = (17, 3)) # 17x3 matrix
         count = 0
@@ -53,6 +54,7 @@ def annotate(path):
     else:
         print("Something went wrong!")
 
+# function to save the output of into the json file
 def save(final_json, path):
     path = path[:-5]
     path += "_processed.json"
@@ -63,6 +65,7 @@ def save(final_json, path):
     with open(path, 'w') as outfile:
         outfile.write(json_object)
 
+# wrapper function that calls and coordinates others
 def main():
     task = 0
     while(task != 4):
