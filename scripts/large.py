@@ -1,5 +1,5 @@
-# parallalize this script on 3 cores for train, test and validation dataset
 import os
+from multiprocessing import Process
 
 # global variables
 TRAIN_URL = 'http://images.cocodataset.org/zips/train2017.zip'
@@ -36,6 +36,21 @@ def download_val():
     os.system('clear')
     print('VALIDATION SET EXTRACTED')
 
-download_train()
-download_test()
-download_val()
+
+########### Execute in main thread #############
+if __name__ == '__main__':
+    process_arr = []
+    p = Process(target = download_train)
+    process_arr.append(p)
+    p.start()
+
+    p = Process(target = download_val)
+    process_arr.append(p)
+    p.start()
+
+    p = Process(target = download_test)
+    process_arr.append(p)
+    p.start()
+
+    for p in process_arr:
+        p.join()
