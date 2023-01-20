@@ -6,7 +6,10 @@ For smaller subset of the dataset, the dataset is downloaded from google drive. 
 
 For the entire dataset, the process has been parallelized so that simultaneously all the three datasets get downloaded, extracted and saved in the required folder to get used by the rest of the project.
 
+For processing annotations and fetching only the required fields, fetch_annotations.py manipulates the existing json to create a processed version of it.
+
 # Libraries Used
 * os - For runnning system level commands
 * multiprocessing - For parallelizing the extraction of the entire dataset.
 * gdown - For downloading the subset of data from google drive.
+* json - For manipulating json files
