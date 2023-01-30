@@ -38,4 +38,6 @@ python large.py
 ```bash
 # ensure that current directory in scripts
 python fetch_annotation.py
+python strip_names.py
+python prepare_data.py
 ```
