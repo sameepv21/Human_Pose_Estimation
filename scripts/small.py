@@ -10,7 +10,7 @@ gdown.download(URL, OUTPUT_FILE_NAME, quiet = False, fuzzy = True)
 # Extract the zip folder and place it in the data folder
 print("EXTRACTING.....")
 os.system("unzip dataset.zip > /dev/null")
-# os.system('rm -rf dataset.zip')
+os.system('rm -rf dataset.zip')
 os.system('cp coco_single_person_only/train ../data  -r')
 os.system('cp coco_single_person_only/valid ../data  -r')
 os.system('rm -rf coco_single_person_only/')
