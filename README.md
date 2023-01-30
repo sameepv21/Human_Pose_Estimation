@@ -10,6 +10,7 @@ The purpose of this project is to identify and locate key points, such as the jo
 * The device needs at least 4 cores to run this project. 
 
 # Installation and Running
+> It is important to run the following commands in the exact sequence in which they appear otherwise there are chances that errors may arise and the program won't run successfully.
 * Clone the repository using the below command
 ```bash
 git clone https://github.com/sameepv21/Human_Pose_Estimation.git
@@ -40,4 +41,5 @@ python large.py
 python fetch_annotation.py
 python strip_names.py
 python prepare_data.py
+python resize_images.py
 ```
