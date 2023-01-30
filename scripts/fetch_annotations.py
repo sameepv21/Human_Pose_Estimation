@@ -27,7 +27,8 @@ def annotate(path):
 
     arr_json = [] # final array for storing records for all the images
     len_flag = 0 # assertion flag for checking if the number of images in the JSON file and array are same or not
-    for img_data in data.get('annotations'):
+    annotations = data.get('annotations')
+    for img_data in annotations:
         cleaned_data = {} # temp dict for individual image
         len_flag += 1
         cleaned_data['image_id'] = img_data.get('image_id')
