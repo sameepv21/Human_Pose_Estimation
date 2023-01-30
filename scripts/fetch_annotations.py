@@ -57,8 +57,6 @@ def annotate(path):
 
 # function to save the output of into the json file
 def save(final_json, path):
-    path = path[:-5]
-    path += "_processed.json"
     # serialize the json
     json_object = json.dumps(final_json)
 
