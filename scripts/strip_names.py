@@ -1,6 +1,7 @@
 import os
 
 def strip_till_first_nonzero(fileName):
+    modified_fileName = ""
     for index, char in enumerate(fileName):
         if char != '0':
             break
@@ -14,5 +15,8 @@ def clean_names(path):
         modified_filename = strip_till_first_nonzero(fileName)
         os.system('mv ' + path + '/' + fileName + ' ' + path + '/' + modified_filename)
 
+print('Processing train images...')
 clean_names('../data/train/images')
+
+print('Processing valid images...')
 clean_names('../data/valid/images')
