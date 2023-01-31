@@ -46,7 +46,6 @@ def annotate(path):
         cleaned_data['keypoints'] = processed_keypoints.tolist()
 
         cleaned_data['category_id'] = img_data.get('category_id')
-        cleaned_data['segmentation'] = img_data.get('segmentation')
         dict_json[image_id] = cleaned_data
 
     # assertion
