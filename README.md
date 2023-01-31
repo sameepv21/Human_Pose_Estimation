@@ -37,9 +37,21 @@ python large.py
 ```
 * Process the annotations file to fetch only the required number of fields / records.
 ```bash
-# ensure that current directory in scripts
+# ensure that current directory is scripts
 python fetch_annotation.py
+```
+* If you have selected the smaller dataset, then the file names need to be in accordance with image id found in the annotations. Run the below command to do so.
+```bash
+# ensure that current directory is scripts 
 python strip_names.py
+```
+* There is no distinct test images and hence split training data randomly to get the test set
+```bash
+# ensure that current directory is scripts
 python prepare_data.py
+```
+* Resize images to a standard 224 x 224 dimensions along with keypoints and bounding box
+```bash
+# ensure that current directory is scripts
 python resize_images.py
 ```
