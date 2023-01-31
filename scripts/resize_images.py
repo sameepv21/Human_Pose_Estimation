@@ -89,8 +89,8 @@ for index, fileName in enumerate(os.listdir(VAL_PATH)):
     image_np = np.asarray(_image)
 
     # find the new scaling factor after the image resize
-    row_scaling_factor = SCALING_SIZE[0] / image_np.shape[0]
-    col_scaling_factor = SCALING_SIZE[1] / image_np.shape[1]
+    row_scaling_factor = SCALING_SIZE[0] / image_np.shape[1]
+    col_scaling_factor = SCALING_SIZE[1] / image_np.shape[0]
 
     # fetch keypoints, bbox and segmentation
     keypoints = np.array(VAL_DATA.get(image_id).get('keypoints'))
@@ -99,6 +99,10 @@ for index, fileName in enumerate(os.listdir(VAL_PATH)):
     # resize keypoints
     keypoints[:, 0] = keypoints[:, 0] * row_scaling_factor
     keypoints[:, 1] = keypoints[:, 1] * col_scaling_factor
+    
+    # print("\nImage shape", image_np.shape)
+    # print("Row Scaling Factor", row_scaling_factor)
+    # print("Col Scaling Factor", col_scaling_factor)
 
     # resize bbox
     bbox[0] = bbox[0] * row_scaling_factor
