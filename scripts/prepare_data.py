@@ -1,5 +1,4 @@
 # Required libraries
-import numpy as np
 import splitfolders as sf
 import os
 import json
@@ -33,20 +32,21 @@ def organize():
 # Create annotation.json for test dataset
 def generate_test_annotation(annotation_path = ANNOTATION_PATH):
     print("Generating Annotations File...")
-    test_json = []
-    train_json = []
+    test_json = {}
+    train_json = {}
+    
     with open(annotation_path) as json_file:
         data = json.load(json_file)
 
-    temp_arr = []
-    for fileName in os.listdir('../data/test/images'):
-        temp_arr.append(int(fileName.strip('.jpg')))
-
-    for img_data in data:
-        if(img_data.get('image_id') in temp_arr):
-            test_json.append(img_data)
-        else:
-            train_json.append(img_data)
+    # populate training set json
+    for fileName in os.listdir(os.path.join(RELATIVE_PATH, 'train/images')):
+        image_id = fileName.strip('.jpg')
+        train_json[image_id] = data.get(image_id)
+    
+    # populate test set json
+    for fileName in os.listdir(os.path.join(RELATIVE_PATH, 'test/images')):
+        image_id = fileName.strip('.jpg')
+        test_json[image_id] = data.get(image_id)
     
     # save to the respective locations
     train_object = json.dumps(train_json)
