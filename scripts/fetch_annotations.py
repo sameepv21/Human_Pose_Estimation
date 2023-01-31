@@ -25,7 +25,7 @@ def annotate(path):
     with open(path) as json_file:
         data = json.load(json_file)
 
-    dict_json = [] # final dict for storing records for all the images
+    dict_json = {} # final dict for storing records for all the images
     len_flag = 0 # assertion flag for checking if the number of images in the JSON file and array are same or not
     annotations = data.get('annotations')
     for img_data in annotations:
@@ -57,9 +57,12 @@ def annotate(path):
 
 # function to save the output of into the json file
 def save(final_json, path):
+    # serialize the json
+    json_object = json.dumps(final_json)
+
     # save to file
     with open(path, 'w') as outfile:
-        outfile.write(final_json)
+        outfile.write(json_object)
 
 # wrapper function that calls and coordinates others
 def main():
