@@ -27,8 +27,12 @@ keypoints = [
 
 # Loop over the keypoints and draw a circle at each location
 for x, y in keypoints:
-    cv2.circle(image, (int(x), int(y)), 5, (0, 0, 255), -1)
+    cv2.circle(image, (int(x), int(y)), 4, (0, 0, 255), -1)
 
+# Draw the bounding box using the cv2.rectangle() function
+x, y, w, h = [54, 78, 100, 61]
+cv2.rectangle(image, [x, y], [x+w, y+h], [255, 0, 0], 2)
+# image, (x, y), (x+w, y+h), (255, 0, 0), 2
 # Display the image with the keypoints superimposed
 cv2.imshow("Keypoints", image)
 cv2.waitKey(0)
