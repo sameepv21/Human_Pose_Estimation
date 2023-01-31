@@ -25,13 +25,13 @@ def annotate(path):
     with open(path) as json_file:
         data = json.load(json_file)
 
-    arr_json = [] # final array for storing records for all the images
+    dict_json = [] # final dict for storing records for all the images
     len_flag = 0 # assertion flag for checking if the number of images in the JSON file and array are same or not
     annotations = data.get('annotations')
     for img_data in annotations:
         cleaned_data = {} # temp dict for individual image
         len_flag += 1
-        cleaned_data['image_id'] = img_data.get('image_id')
+        image_id = img_data.get('image_id')
         cleaned_data['bbox'] = img_data.get('bbox')
         
         # create a 17x3 matrix instead of 51,1
@@ -47,22 +47,19 @@ def annotate(path):
 
         cleaned_data['category_id'] = img_data.get('category_id')
         cleaned_data['segmentation'] = img_data.get('segmentation')
-        arr_json.append(cleaned_data)
+        dict_json[image_id] = cleaned_data
 
     # assertion
-    if(len(arr_json) == len_flag):
-        return arr_json
+    if(len(dict_json) == len_flag):
+        return dict_json
     else:
         print("Something went wrong!")
 
 # function to save the output of into the json file
 def save(final_json, path):
-    # serialize the json
-    json_object = json.dumps(final_json)
-
     # save to file
     with open(path, 'w') as outfile:
-        outfile.write(json_object)
+        outfile.write(final_json)
 
 # wrapper function that calls and coordinates others
 def main():
