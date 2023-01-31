@@ -50,10 +50,10 @@ for index, fileName in enumerate(os.listdir(TRAIN_PATH)):
     # print("Col Scaling Factor", col_scaling_factor)
 
     # resize bbox
-    bbox[0] = bbox[0] * row_scaling_factor
-    bbox[1] = bbox[1] * col_scaling_factor
-    bbox[2] = bbox[2] * row_scaling_factor
-    bbox[3] = bbox[3] * col_scaling_factor
+    bbox[0] = int(bbox[0] * row_scaling_factor)
+    bbox[1] = int(bbox[1] * col_scaling_factor)
+    bbox[2] = int(bbox[2] * row_scaling_factor)
+    bbox[3] = int(bbox[3] * col_scaling_factor)
 
     # save it to the json
     TRAIN_DATA.get(image_id)['keypoints'] = keypoints.tolist()
@@ -97,10 +97,10 @@ for index, fileName in enumerate(os.listdir(TEST_PATH)):
     # print("Col Scaling Factor", col_scaling_factor)
 
     # resize bbox
-    bbox[0] = bbox[0] * row_scaling_factor
-    bbox[1] = bbox[1] * col_scaling_factor
-    bbox[2] = bbox[2] * row_scaling_factor
-    bbox[3] = bbox[3] * col_scaling_factor
+    bbox[0] = int(bbox[0] * row_scaling_factor)
+    bbox[1] = int(bbox[1] * col_scaling_factor)
+    bbox[2] = int(bbox[2] * row_scaling_factor)
+    bbox[3] = int(bbox[3] * col_scaling_factor)
 
     # save it to the json
     TEST_DATA.get(image_id)['keypoints'] = keypoints.tolist()
@@ -144,10 +144,10 @@ for index, fileName in enumerate(os.listdir(VAL_PATH)):
     # print("Col Scaling Factor", col_scaling_factor)
 
     # resize bbox
-    bbox[0] = bbox[0] * row_scaling_factor
-    bbox[1] = bbox[1] * col_scaling_factor
-    bbox[2] = bbox[2] * row_scaling_factor
-    bbox[3] = bbox[3] * col_scaling_factor
+    bbox[0] = int(bbox[0] * row_scaling_factor)
+    bbox[1] = int(bbox[1] * col_scaling_factor)
+    bbox[2] = int(bbox[2] * row_scaling_factor)
+    bbox[3] = int(bbox[3] * col_scaling_factor)
 
     # save it to the json
     VAL_DATA.get(image_id)['keypoints'] = keypoints.tolist()
