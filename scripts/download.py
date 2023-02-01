@@ -86,3 +86,6 @@ else:
     os.system('cp coco_single_person_only/valid ../data  -r')
     os.system('rm -rf coco_single_person_only/')
     print("COMPLETED EXTRACTION")
+
+end = time.time()
+print("Time taken to download:", round((end - start), 2), "seconds")
