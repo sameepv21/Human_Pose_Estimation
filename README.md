@@ -24,34 +24,20 @@ pip install -r requirements.txt
 mkdir data
 ```
 * Now there are two options, either you want to download the 
-* Download and extract the subset of data
+* Download and extract the data
 ```bash
 cd scripts/
-python small.py
+python download.py
 ```
-> Check once in the "data" folder whether you have a directory named "small".
-* Download and extract the entire dataset
-```bash
-cd scripts/
-python large.py
-```
+> Note that by default, a subset of dataset would be downloaded which contains only single person in the image. If you want to download the entire coco2017 keypoints dataset use the -f or --full flag in the command above.
+
 * Process the annotations file to fetch only the required number of fields / records.
 ```bash
 # ensure that current directory is scripts
 python fetch_annotation.py
 ```
-* If you have selected the smaller dataset, then the file names need to be in accordance with image id found in the annotations. Run the below command to do so.
+* Run the below command to prepare the dataset for training if you selected the subset of dataset.
 ```bash
-# ensure that current directory is scripts 
-python strip_names.py
-```
-* There is no distinct test images and hence split training data randomly to get the test set
-```bash
-# ensure that current directory is scripts
+# Ensure that current directory is scripts
 python prepare_data.py
-```
-* Resize images to a standard 224 x 224 dimensions along with keypoints and bounding box
-```bash
-# ensure that current directory is scripts
-python resize_images.py
 ```
