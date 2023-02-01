@@ -153,7 +153,7 @@ for index, fileName in enumerate(os.listdir(VAL_PATH)):
     VAL_DATA.get(image_id)['keypoints'] = keypoints.tolist()
     VAL_DATA.get(image_id)['bbox'] = bbox.tolist()
 
-    _image = _image.resize(SCALING_SIZE)
+    _image = _image.convert('RGB').resize(SCALING_SIZE)
     os.system("rm -rf " + os.path.join(VAL_PATH, fileName))
     _image.save(os.path.join(VAL_PATH, fileName))
 
