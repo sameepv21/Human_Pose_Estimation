@@ -82,8 +82,8 @@ else:
     print("EXTRACTING.....")
     os.system("unzip dataset.zip > /dev/null")
     os.system('rm -rf dataset.zip')
-    os.system('cp coco_single_person_only/train ../data  -r')
-    os.system('cp coco_single_person_only/valid ../data  -r')
+    os.system('mv coco_single_person_only/train ../data')
+    os.system('mv coco_single_person_only/valid ../data')
     os.system('rm -rf coco_single_person_only/')
     print("COMPLETED EXTRACTION")
 
