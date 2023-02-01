@@ -38,6 +38,6 @@ python fetch_annotation.py
 ```
 * Run the below command to prepare the dataset for training if you selected the subset of dataset.
 ```bash
-# Ensure that current directory is scripts
+# ensure that current directory is scripts
 python prepare_data.py
 ```
