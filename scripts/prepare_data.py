@@ -140,6 +140,7 @@ def get_keypoints(path, data, store_file):
 
     # Manually created array for columns
     df_columns = [
+        'imageId',
         'joint1x', 'joint1y', 
         'joint2x', 'joint2y', 
         'joint3x', 'joint3y', 
@@ -167,6 +168,7 @@ def get_keypoints(path, data, store_file):
         img_data = data.get(img_id)
         keypoints = img_data['keypoints']
         temp_arr = []
+        temp_arr.append(img_id)
 
         # Append for each column to get individual columns
         for arr in keypoints:
