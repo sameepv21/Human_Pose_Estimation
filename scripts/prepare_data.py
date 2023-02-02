@@ -135,8 +135,10 @@ def resize_images(path, scaling_size, annotation_path, data):
     with open(annotation_path, 'w') as outfile:
         outfile.write(serialized_object)
     
+# Function to fetch and store keypoints in csv format
 def get_keypoints(path, data, store_file):
 
+    # Manually created array for columns
     df_columns = [
         'joint1x', 'joint1y', 
         'joint2x', 'joint2y', 
@@ -159,18 +161,21 @@ def get_keypoints(path, data, store_file):
 
     temp_df = pd.DataFrame(columns = df_columns)
 
+    # Iterate over each filename
     for fileName in os.listdir(path):
         img_id = fileName.strip(".jpg")
         img_data = data.get(img_id)
         keypoints = img_data['keypoints']
         temp_arr = []
 
+        # Append for each column to get individual columns
         for arr in keypoints:
             temp_arr.append(arr[0])
             temp_arr.append(arr[1])
         
         temp_df.loc[len(temp_df.index)] = temp_arr
     
+    # Save to csv file
     temp_df.to_csv(store_file, header=True, index = False)
 
 def main():
