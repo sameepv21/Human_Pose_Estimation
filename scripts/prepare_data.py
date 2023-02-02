@@ -6,6 +6,7 @@ import time
 from PIL import Image
 import os
 import numpy as np
+import pandas as pd
 
 # Global variables
 TRAIN_SIZE = 0.8
@@ -30,8 +31,6 @@ TEST_DATA = None
 
 # Strip names to conform to annotations.json
 def strip_names(path):
-    start = time.time()
-    
     for fileName in os.listdir(path):
         modified_fileName = ""
         for index, char in enumerate(fileName):
@@ -41,13 +40,8 @@ def strip_names(path):
                 modified_fileName = fileName[index + 1:]
         os.system('mv ' + path + '/' + fileName + ' ' + path + '/' + modified_fileName)
     
-    end = time.time()
-
-    print('Time taken to clean names:', round((end - start), 2), 'seconds')
-
 # Split folders
 def split_images():
-    start = time.time()
 
     sf.ratio(
         os.path.join(RELATIVE_PATH, "train"),
@@ -57,12 +51,8 @@ def split_images():
         group_prefix = None
     )
 
-    end = time.time()
-    print('Time taken to split folders:', round((end - start), 2), 'seconds')
-
 # Copy and organize file
 def organize():
-    start = time.time()
 
     print("Organizing...")
     os.system("cp " + ANNOTATION_PATH + " ../data/preprocessed/train/annotation.json")
@@ -71,12 +61,8 @@ def organize():
     os.system('cp ../data/preprocessed/val ../data/test -r')
     os.system('rm -rf ../data/preprocessed')
 
-    end = time.time()
-    print("Time taken to organize foders:", round((end - start), 2), 'seconds')
-
 # Create annotation.json for test dataset
 def generate_test_annotation(annotation_path = ANNOTATION_PATH):
-    start = time.time()
 
     print("Generating Annotations File...")
     test_json = {}
@@ -107,11 +93,7 @@ def generate_test_annotation(annotation_path = ANNOTATION_PATH):
     with open('../data/test/annotation.json', 'w') as outfile:
         outfile.write(test_object)
 
-    end = time.time()
-    print("Time taken to generate test annotations:", round((end - start), 2), 'seconds')
-
 def resize_images(path, scaling_size, annotation_path, data):
-    start = time.time()
 
     # Load and resize images
     for index, fileName in enumerate(os.listdir(path)):
@@ -153,32 +135,75 @@ def resize_images(path, scaling_size, annotation_path, data):
     with open(annotation_path, 'w') as outfile:
         outfile.write(serialized_object)
     
-    end = time.time()
-    print("Time taken to resize images:", round((end - start), 2), 'seconds')
+def get_keypoints(path, data, store_file):
 
+    df_columns = [
+        'joint1x', 'joint1y', 
+        'joint2x', 'joint2y', 
+        'joint3x', 'joint3y', 
+        'joint4x', 'joint4y', 
+        'joint5x', 'joint5y', 
+        'joint6x', 'joint6y', 
+        'joint7x', 'joint7y', 
+        'joint8x', 'joint8y', 
+        'joint9x', 'joint9y',
+        'joint10x', 'joint10y', 
+        'joint11x', 'joint11y', 
+        'joint12x', 'joint12y', 
+        'joint13x', 'joint13y', 
+        'joint14x', 'joint14y', 
+        'joint15x', 'joint15y', 
+        'joint16x', 'joint16y', 
+        'joint17x', 'joint17y'
+    ]
+
+    temp_df = pd.DataFrame(columns = df_columns)
+
+    for fileName in os.listdir(path):
+        img_id = fileName.strip(".jpg")
+        img_data = data.get(img_id)
+        keypoints = img_data['keypoints']
+        temp_arr = []
+
+        for arr in keypoints:
+            temp_arr.append(arr[0])
+            temp_arr.append(arr[1])
+        
+        temp_df.loc[len(temp_df.index)] = temp_arr
+    
+    temp_df.to_csv(store_file, header=True, index = False)
 
 def main():
     print('Cleaning names of training dataset....')
     strip_names(TRAIN_PATH)
 
-    print('Cleaning names of validation dataset')
+    print('\nCleaning names of validation dataset')
     strip_names(VAL_PATH)
 
-    print('Splitting images into train and test dataset')
+    print('\nSplitting images into train and test dataset')
     split_images()
     organize()
     generate_test_annotation(ANNOTATION_PATH)
 
     TEST_DATA = json.load(open(TEST_ANNOTATION_PATH))
 
-    print('Resizing Training Images....')
+    print('\nResizing Training Images....')
     resize_images(TRAIN_PATH, SCALING_SIZE, TRAIN_ANNOTATION_PATH, TRAIN_DATA)
     
-    print('Resizing Validation Images....')
+    print('\nResizing Validation Images....')
     resize_images(VAL_PATH, SCALING_SIZE, VAL_ANNOTATION_PATH, VAL_DATA)
 
-    print('Resizing Test Images....')
+    print('\nResizing Test Images....')
     resize_images(TEST_PATH, SCALING_SIZE, TEST_ANNOTATION_PATH, TEST_DATA)
+
+    print("\nFetching keypoints for Training Images....")
+    get_keypoints(TRAIN_PATH, TRAIN_DATA, os.path.join(RELATIVE_PATH, 'train/keypoints.csv'))
+
+    print("\nFetching keypoints for Validation Images....")
+    get_keypoints(VAL_PATH, VAL_DATA, os.path.join(RELATIVE_PATH, 'valid/keypoints.csv'))
+
+    print("\nFetching keypoints for Test Images....")
+    get_keypoints(TEST_PATH, TEST_DATA, os.path.join(RELATIVE_PATH, 'test/keypoints.csv'))
 
 start = time.time()
 main()
